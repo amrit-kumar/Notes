@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from note.theNoteApp.serializers import UserSerializer, GroupSerializer
+
+from noteapp.models import Note
+from noteapp.serializers import UserSerializer, GroupSerializer, NoteSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,3 +22,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class NoteViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+    # permission_classes = [permissions.IsAuthenticated]
